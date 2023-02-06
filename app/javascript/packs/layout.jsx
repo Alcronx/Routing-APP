@@ -34,7 +34,7 @@ export default function Layout() {
       </AppBar>
       {/* Aqui es donde cargaran los componentes hijos */}
       <Grid container justifyContent="center">
-        <Grid container item justifyContent="center" sx={{ mt: 3, mb: 3, ml:2, mr:2 }}>
+        <Grid container sx={{ mt: 3, ml:2, mr:2 }}>
           <Outlet/>
         </Grid>
       </Grid>      

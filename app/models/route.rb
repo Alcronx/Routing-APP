@@ -55,6 +55,27 @@ class Route < ApplicationRecord
         return(routeArray)
     end
 
+    #Funcion que trae las rutas de cada organizacions
+    def self.loadTimeLine(organizationId)
+        routeList = Route.left_joins(:driver, :vehicle).where(organization_id: organizationId).order('id ASC')
+        routeArray = []
+        routeList.each do |route|
+            routeArray.push(
+                {    
+                    :id_route => route.id,
+                    :id_driver => route.driver&.id,
+                    :id_vehicle => route.driver&.id,
+                    :route_name  =>  route.name ,
+                    :starts_at  =>  route.starts_at.utc.strftime("%Y-%m-%d %H:%M:%S"),
+                    :ends_at  => route.ends_at.utc.strftime("%Y-%m-%d %H:%M:%S"),
+                    :driver_name => route.driver&.name,
+                    :vehicle_plate => route.vehicle&.plate
+                }
+            )
+        end
+        return(routeArray)
+    end
+
     def self.overlapSchedules(driverId,vehicleId,routeId)
         routeList = Route.find_by_sql(["
                 SELECT 

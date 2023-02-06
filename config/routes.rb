@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'loadVehicleDriver/:organizationId', to: 'routes#loadVehicleDriver'
   get 'loadRoutesAssigned/:routeId/:driverId/:vehicleId', to: 'routes#loadRoutesAssigned'
   post 'assignRoute', to: 'routes#assignRoute'
+  get 'loadTimeLine/:organizationId', to: 'routes#loadTimeLine'
 
   root 'home#index'
   match "*path", to: "home#index", via: :all

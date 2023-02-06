@@ -24,6 +24,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import { GoogleMap, useLoadScript, Polygon, Marker } from '@react-google-maps/api';
+import TimeLineComp from './timeline';
 
 
 
@@ -76,7 +77,7 @@ export default function RoutesC() {
       });
   }
 
-  //Asignara un vehiculo o un conductor a la ruta correspondiente
+  //Aqui se manejan las alertas
   const sweetAlert = (title, textHtml, icon) => {
     MySwal.fire({
       title: <strong>{title}</strong>,
@@ -328,7 +329,7 @@ export default function RoutesC() {
       (
         <>
           {console.log("Se ejecuta Pagina")}
-          <Grid container justifyContent="space-between" height={"380px"} spacing={2}>
+          <Grid container justifyContent="space-between" height={"380px"} spacing={2} sx={{mb: 8}}>
             <Grid item xs={8}>
               <Grid container alignItems={"center"}>
                 <ArrowBackIcon className='icons' fontSize="large" color="primary" onClick={() => { navigate(-1) }} />
@@ -358,7 +359,7 @@ export default function RoutesC() {
                         <TableCell align="center">{row.action}</TableCell >
                         <TableCell align="center">{returnStatus(row.status)}</TableCell >
                         <TableCell align="center">
-                          <Button variant="outlined" sx={{ width: "70%" }}
+                          <Button variant="outlined" key={index} sx={{ width: "70%" }}
                             onClick={() => (handleClickOpen(row))}>
                             {returnAsignation(row.driver_name, row.vehicle_plate)}
                           </Button>
@@ -369,13 +370,11 @@ export default function RoutesC() {
                 </Table>
               </TableContainer>
             </Grid>
-            <Grid item container justifyContent={"center"} alignItems={"center"} xs={4}>
+            <Grid item container  xs={4} justifyContent={"center"} alignItems={"center"}>
               {isLoaded ? <Map /> : <CircularProgress />}
             </Grid>
           </Grid>
-          <Grid container alignContent={"end"} justifyContent={"center"} sx={{position:"fixed",bottom:0,width:"100%"}}>
-            cuadrito de abajo
-          </Grid>
+          <TimeLineComp organizationId={ state.organizationId}/>
           <DialogComponent />
         </>
       )
@@ -425,10 +424,12 @@ function Map() {
       ))}
       <Polygon
         paths={route1}
+        key = {1}
         options={optionsList("red")}
       />
       <Polygon
         paths={route2}
+        key = {2}
         options={optionsList("#5eacef")}
       />
     </GoogleMap>

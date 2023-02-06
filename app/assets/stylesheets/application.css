@@ -120,3 +120,95 @@ h1,h2,h3,h4,h5,h6,p,button,input,td{
   width: 100%;
   height: 100%;
 }
+
+
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-even,
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-odd {
+  border-bottom: none;
+}
+
+.react-calendar-timeline .rct-horizontal-lines .rct-hl-even {
+  background-color: #ffffff;
+}
+
+.react-calendar-timeline .rct-sidebar .rct-sidebar-row {
+  border-bottom: none;
+}
+
+.react-calendar-timeline .rct-header .rct-label {
+  border-bottom: none;
+}
+
+.react-calendar-timeline .rct-vertical-lines .rct-vl.rct-vl-first {
+  border-color: #ccc;
+}
+
+.react-calendar-timeline .rct-vertical-lines .rct-vl {
+  border-left: 1px solid #eeeeee87;
+}
+
+.react-calendar-timeline .rct-header .rct-label-group {
+  font-family: "Work Sans", sans-serif;
+  background: #eee;
+  color: #000;
+  font-size: 1rem;
+}
+
+.react-calendar-timeline .rct-sidebar-header {
+  background: #eee;
+  color: #000;
+  text-align: center;
+  padding-top: 1rem;
+  border: none;
+  border-right: solid 2px #ccc !important;
+}
+.ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.ripple:active:after {
+  transform: scale(0, 0);
+  opacity: 0.2;
+  transition: 0s;
+}
+
+.ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, #000 10%, transparent 10.01%) no-repeat
+    50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+}
+
+.routeAsignation {
+  background-color: rgb(26 130 233) !important;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+}
+.react-calendar-timeline .rct-header .rct-label-group {
+  background-color: rgb(26 130 233) !important;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+}
+
+.react-calendar-timeline .rct-sidebar-header {
+  background-color: rgb(26 130 233) !important;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+}
+
+.rct-sidebar{
+  text-align: center;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+}
+
+.rct-label-group {
+  display: none;
+}

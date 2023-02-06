@@ -42,4 +42,11 @@ class RoutesController < ApplicationController
             end
         end
     end
+
+    #Aqui se cargara el Time Line
+    def loadTimeLine
+        organizationId = params[:organizationId]
+        routes = Route.loadTimeLine(organizationId)
+        render json: {status: "SUCCESS", data: routes}
+    end
 end
