@@ -23,6 +23,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
+import { GoogleMap, useLoadScript, Polygon, Marker } from '@react-google-maps/api';
 
 
 
@@ -42,9 +43,10 @@ export default function RoutesC() {
     setActualRoute(route)
   };
   const handleClose = () => { setOpen(false); };
-
+  //Se cargara la api de google Maps
+  const { isLoaded } = useLoadScript({ googleMapsApiKey: "AIzaSyDlQEvOWsnb6PaLK5-8xWxrFomsy3AV0Ag" });
   //funcion para parametirar sweet aelrt
-  const assignRoute = (driverV,vehicleV,routeId) => {
+  const assignRoute = (driverV, vehicleV, routeId) => {
     setOpen(false);
     const url = "/assignRoute";
     let data = {
@@ -226,7 +228,7 @@ export default function RoutesC() {
             <Button autoFocus onClick={handleClose}>
               Cancelar
             </Button>
-            <Button onClick={()=>(assignRoute(driverV,vehicleV,routeId))} disabled={overlapSchedules > 0} autoFocus>
+            <Button onClick={() => (assignRoute(driverV, vehicleV, routeId))} disabled={overlapSchedules > 0} autoFocus>
               Asignar
             </Button>
           </DialogActions>
@@ -263,7 +265,7 @@ export default function RoutesC() {
         });
     };
     fetchData();
-  }, [state.organizationId,recharge]);
+  }, [state.organizationId, recharge]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -290,7 +292,7 @@ export default function RoutesC() {
         });
     };
     fetchData();
-  }, [state.organizationId,recharge]);
+  }, [state.organizationId, recharge]);
   //Retornara el Estado de la ruta
   const returnStatus = (status) => {
     switch (status) {
@@ -326,7 +328,7 @@ export default function RoutesC() {
       (
         <>
           {console.log("Se ejecuta Pagina")}
-          <Grid container justifyContent="space-between" spacing={2}>
+          <Grid container justifyContent="space-between" height={"380px"} spacing={2}>
             <Grid item xs={8}>
               <Grid container alignItems={"center"}>
                 <ArrowBackIcon className='icons' fontSize="large" color="primary" onClick={() => { navigate(-1) }} />
@@ -367,9 +369,12 @@ export default function RoutesC() {
                 </Table>
               </TableContainer>
             </Grid>
-            <Grid item xs={4}>
-              Aqui va el mapa
+            <Grid item container justifyContent={"center"} alignItems={"center"} xs={4}>
+              {isLoaded ? <Map /> : <CircularProgress />}
             </Grid>
+          </Grid>
+          <Grid container alignContent={"end"} justifyContent={"center"} sx={{position:"fixed",bottom:0,width:"100%"}}>
+            cuadrito de abajo
           </Grid>
           <DialogComponent />
         </>
@@ -378,6 +383,57 @@ export default function RoutesC() {
   );
 };
 
+const route1 = [
+  { lat: -33.510191, lng: -70.757234 },
+  { lat: -33.509100, lng: -70.769637 },
+  { lat: -33.503553, lng: -70.765860 },
+  { lat: -33.503625, lng: -70.757363 },
+]
+
+const route2 = [
+  { lat: -33.510191, lng: -70.757234 },
+  { lat: -33.511783, lng: -70.757835 },
+  { lat: -33.520085, lng: -70.757448 },
+]
+
+function optionsList(color) {
+  return ({
+    fillColor: color,
+    fillOpacity: 0.2,
+    strokeColor: color,
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    geodesic: false,
+    zIndex: 1
+  }
+  )
+}
+
+
+function Map() {
+
+  return (
+    <GoogleMap zoom={14} center={{ lat: -33.510191, lng: -70.757234 }} mapContainerClassName="map-container">
+      {route1.map((i) => (
+        <Marker key={"route1"+{i}} position={i}  icon={{url: require("../assets/images/LocationRed.png")}}/>
+      ))}
+      {route2.map((i) => (
+        <Marker key={"route2"+{i}} position={i}  icon={{url: require("../assets/images/LocationBlue.png")}}/>
+      ))}
+      <Polygon
+        paths={route1}
+        options={optionsList("red")}
+      />
+      <Polygon
+        paths={route2}
+        options={optionsList("#5eacef")}
+      />
+    </GoogleMap>
+  )
+}
 
 
 
