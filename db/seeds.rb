@@ -43,8 +43,8 @@ Route.create!([
   #Routing
   { 
     name: "Ruta 1",
-    starts_at: Time.now.change(hour: 9, min: 0, sec: 0), 
-    ends_at: Time.now.change(hour: 11, min: 30, sec: 0),
+    starts_at: Time.now.utc.change(hour: 9, min: 0, sec: 0), 
+    ends_at: Time.now.utc.change(hour: 11, min: 30, sec: 0),
     travel_time: 2.hour + 30.minutes, 
     total_stops: 3, 
     action: "Recogida", 
@@ -53,8 +53,8 @@ Route.create!([
   },
   { 
     name: "Ruta 2",
-    starts_at: Time.now.change(hour: 9, min: 0, sec: 0), 
-    ends_at: Time.now.change(hour: 10, min: 10, sec: 0),
+    starts_at: Time.now.utc.change(hour: 9, min: 0, sec: 0), 
+    ends_at: Time.now.utc.change(hour: 10, min: 10, sec: 0),
     travel_time: 1.hour + 10.minutes, 
     total_stops: 2, 
     action: "Recogida", 
@@ -63,8 +63,8 @@ Route.create!([
   },
   { 
     name: "Ruta 3",
-    starts_at: Time.now.change(hour: 11, min: 0, sec: 0), 
-    ends_at: Time.now.change(hour: 13, min: 30, sec: 0),
+    starts_at: Time.now.utc.change(hour: 11, min: 0, sec: 0), 
+    ends_at: Time.now.utc.change(hour: 13, min: 30, sec: 0),
     travel_time: 2.hour + 30.minutes, 
     total_stops: 7, 
     action: "Recogida", 

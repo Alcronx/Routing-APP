@@ -1,20 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {createBrowserRouter,RouterProvider} from "react-router-dom";
-import App from "./components/App";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
+import Organization from "./components/organization";
+import RoutesC from "./components/routesC";
+import Layout from "./layout";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-]);
 
+//Una vez creado el div Routing-app, se cargara toda la logica
 ReactDOM.createRoot(document.getElementById("Routing-app")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  //<React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        {/* Este es el componente padra */}
+        <Route path="/" element={<Layout />}>
+          {/* Aqui se cargaran las rutas hijas que heredaran todo de Layout */}
+          <Route index element={<Organization />} />
+          <Route path="/Rutas" element={<RoutesC/>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  //</React.StrictMode>
 );
+
 
 
 
