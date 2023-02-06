@@ -1,13 +1,17 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
-  timeout: 5000
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 development:
-  adapter: postgresql
-  encoding: unicode
-  database:  PruebaIngreso  
-  host: localhost
-  pool: 5
-  username: postgres
-  password: 15010204
+  <<: *default
+  database: routingreact_development
+test:
+  <<: *default
+  database: routingreact_test
+production:
+  <<: *default
+  database: routingreact_production
+  username: routingreact
+  password: <%= ENV["ROUTINGREACT_DATABASE_PASSWORD"] %>
