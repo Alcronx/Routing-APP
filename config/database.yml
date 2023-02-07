@@ -12,6 +12,7 @@ test:
   database: routingreact_test
 production:
   <<: *default
-  database: routingreact_production
-  username: routingreact
-  password: <%= ENV["ROUTINGREACT_DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
