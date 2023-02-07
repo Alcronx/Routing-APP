@@ -87,7 +87,7 @@ class Route < ApplicationRecord
                     ) as result
                 FROM routes ro
                 WHERE id = ?;
-            ", driverId,vehicleId,routeId]
+            ", vehicleId,driverId,routeId]
         ).first
         result = routeList&.result
         return(result)

@@ -124,7 +124,6 @@ export default function TimeLineComp(props) {
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             fontSize: "1rem",
-            marginLeft: "1rem"
           }}
         >
           {itemContext.title}
@@ -133,18 +132,17 @@ export default function TimeLineComp(props) {
     );
   };
   return (
-    <Timeline
-      keys={keys}
-      items={items}
-      groups={groups}
-      style={{ width: '100%' }}
-      sidebarContent="Rutas"
-      lineHeight={75}
-      itemRenderer={itemRender}
-      visibleTimeStart={date.setHours(0, 0, 0, 0)}
-      visibleTimeEnd={date.setHours(24, 0, 0, 0)}
-      itemHeightRatio={0.75}
-      showHeader={false}
-    />
+      <Timeline
+        keys={keys}
+        items={items}
+        groups={groups}
+        style={{ width: '100%'}}
+        sidebarContent="Rutas"
+        lineHeight={75}
+        itemRenderer={itemRender}
+        visibleTimeStart={date.setHours(0, 0, 0, 0)}
+        visibleTimeEnd={date.setHours(24, 0, 0, 0)}
+        itemHeightRatio={0.75}
+      />
   );
 }

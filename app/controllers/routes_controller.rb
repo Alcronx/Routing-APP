@@ -18,7 +18,7 @@ class RoutesController < ApplicationController
         driverId = params[:driverId]
         vehicleId = params[:vehicleId]
         routeId = params[:routeId]
-        assignedRoutes =  Route.loadRoutesAssigned(vehicleId, driverId)
+        assignedRoutes =  Route.loadRoutesAssigned(driverId,vehicleId)
         overlapSchedules =  Route.overlapSchedules(driverId,vehicleId,routeId)
         render json: {status: "SUCCESS", data: assignedRoutes, OverlapSchedules: overlapSchedules}
     end

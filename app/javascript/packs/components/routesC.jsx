@@ -327,58 +327,60 @@ export default function RoutesC() {
     )
       :
       (
-        <>
-          {console.log("Se ejecuta Pagina")}
-          <Grid container justifyContent="space-between" height={"380px"} spacing={2} sx={{mb: 8}}>
-            <Grid item xs={8}>
-              <Grid container alignItems={"center"}>
-                <ArrowBackIcon className='icons' fontSize="large" color="primary" onClick={() => { navigate(-1) }} />
-                <h2 style={{ marginLeft: "30px" }}>RUTAS</h2>
-              </Grid>
-              <TableContainer component={Paper}>
-                <Table aria-label="customized table">
-                  <TableHead className='table-head'>
-                    <TableRow>
-                      <TableCell align="center">Nombre</TableCell>
-                      <TableCell align="center">Hora</TableCell>
-                      <TableCell align="center">Tiempo</TableCell>
-                      <TableCell align="center"><LocationOnIcon /></TableCell>
-                      <TableCell align="center">Acción</TableCell>
-                      <TableCell align="center">Estado Ruta</TableCell>
-                      <TableCell align="center">Asignacion</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-
-                    {data.map((row, index) => (
-                      <TableRow className={index % 2 === 0 ? "row-v1" : "row-v2"} key={index}>
-                        <TableCell align="center">{row.route_name}</TableCell >
-                        <TableCell align="center">{row.starts_at} - {row.ends_at}</TableCell >
-                        <TableCell align="center">{row.travel_time}</TableCell >
-                        <TableCell align="center">{row.total_stops}</TableCell >
-                        <TableCell align="center">{row.action}</TableCell >
-                        <TableCell align="center">{returnStatus(row.status)}</TableCell >
-                        <TableCell align="center">
-                          <Button variant="outlined" key={index} sx={{ width: "70%" }}
-                            onClick={() => (handleClickOpen(row))}>
-                            {returnAsignation(row.driver_name, row.vehicle_plate)}
-                          </Button>
-                        </TableCell >
+        <Grid container justifyContent="center">
+          <Grid container item direction="row" justifyContent="space-between" alignItems="stretch" sx={{ mt: 3, ml: 2, mr: 2 }}>
+            <Grid container item justifyContent="space-between" xs={12} height={"380px"} spacing={2} sx={{ mb: 8 }}>
+              <Grid item xs={8}>
+                <Grid container alignItems={"center"}>
+                  <ArrowBackIcon className='icons' fontSize="large" color="primary" onClick={() => { navigate(-1) }} />
+                  <h2 style={{ marginLeft: "30px" }}>RUTAS</h2>
+                </Grid>
+                <TableContainer component={Paper}>
+                  <Table aria-label="customized table">
+                    <TableHead className='table-head'>
+                      <TableRow>
+                        <TableCell align="center">Nombre</TableCell>
+                        <TableCell align="center">Hora</TableCell>
+                        <TableCell align="center">Tiempo</TableCell>
+                        <TableCell align="center"><LocationOnIcon /></TableCell>
+                        <TableCell align="center">Acción</TableCell>
+                        <TableCell align="center">Estado Ruta</TableCell>
+                        <TableCell align="center">Asignacion</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
-            <Grid item container  xs={4} justifyContent={"center"} alignItems={"center"}>
-              {isLoaded ? <Map /> : <CircularProgress />}
-            </Grid>
-          </Grid>
-          <TimeLineComp organizationId={ state.organizationId}/>
-          <DialogComponent />
-        </>
-      )
+                    </TableHead>
+                    <TableBody>
 
+                      {data.map((row, index) => (
+                        <TableRow className={index % 2 === 0 ? "row-v1" : "row-v2"} key={index}>
+                          <TableCell align="center">{row.route_name}</TableCell >
+                          <TableCell align="center">{row.starts_at} - {row.ends_at}</TableCell >
+                          <TableCell align="center">{row.travel_time}</TableCell >
+                          <TableCell align="center">{row.total_stops}</TableCell >
+                          <TableCell align="center">{row.action}</TableCell >
+                          <TableCell align="center">{returnStatus(row.status)}</TableCell >
+                          <TableCell align="center">
+                            <Button variant="outlined" key={index} sx={{ width: "70%" }}
+                              onClick={() => (handleClickOpen(row))}>
+                              {returnAsignation(row.driver_name, row.vehicle_plate)}
+                            </Button>
+                          </TableCell >
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+              <Grid item container xs={4} justifyContent={"center"} alignItems={"center"}>
+                {isLoaded ? <Map /> : <CircularProgress />}
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <TimeLineComp organizationId={state.organizationId} />
+            </Grid>
+            <DialogComponent />
+          </Grid>
+        </Grid>
+      )
   );
 };
 
@@ -413,23 +415,22 @@ function optionsList(color) {
 
 
 function Map() {
-
   return (
     <GoogleMap zoom={14} center={{ lat: -33.510191, lng: -70.757234 }} mapContainerClassName="map-container">
-      {route1.map((i) => (
-        <Marker key={"route1"+{i}} position={i}  icon={{url: require("../assets/images/LocationRed.png")}}/>
+      {route1.map((i, index) => (
+        <Marker key={"route1" + index} position={i} icon={{ url: require("../assets/images/LocationRed.png") }} />
       ))}
-      {route2.map((i) => (
-        <Marker key={"route2"+{i}} position={i}  icon={{url: require("../assets/images/LocationBlue.png")}}/>
+      {route2.map((i, index) => (
+        <Marker key={"route2" + index} position={i} icon={{ url: require("../assets/images/LocationBlue.png") }} />
       ))}
       <Polygon
         paths={route1}
-        key = {1}
+        key={1}
         options={optionsList("red")}
       />
       <Polygon
         paths={route2}
-        key = {2}
+        key={2}
         options={optionsList("#5eacef")}
       />
     </GoogleMap>

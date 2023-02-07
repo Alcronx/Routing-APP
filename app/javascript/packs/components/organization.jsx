@@ -9,8 +9,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Paper from '@mui/material/Paper';
 import Swal from 'sweetalert2';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import withReactContent from 'sweetalert2-react-content'
+import Grid from '@mui/material/Grid';
 
 export default function Organization() {
   const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ export default function Organization() {
   const MySwal = withReactContent(Swal)
 
   //funcion para parametirar sweet aelrt
-  const sweetAlert =  (title, textHtml, icon) => {
+  const sweetAlert = (title, textHtml, icon) => {
     MySwal.fire({
       title: <strong>{title}</strong>,
       html: textHtml,
@@ -45,12 +46,12 @@ export default function Organization() {
             setData(res.data)
             setLoad(false);
           } else {
-            sweetAlert("Error","Error al cargar Organizaciones","error")
+            sweetAlert("Error", "Error al cargar Organizaciones", "error")
             setLoad(false);
           }
         })
         .catch(() => {
-          sweetAlert("Error","Error al cargar Organizaciones","error")
+          sweetAlert("Error", "Error al cargar Organizaciones", "error")
           setLoad(false);
         });
     };
@@ -64,42 +65,44 @@ export default function Organization() {
     )
       :
       (
-        <>
-          <h1>Lista Organizaciones</h1>
-          <TableContainer component={Paper}>
-            <Table aria-label="customized table">
-              <TableHead className='table-head'>
-                <TableRow>
-                  <TableCell align="center">Nombre Organizacion</TableCell>
-                  <TableCell align="center">Vehiculos Asignados</TableCell>
-                  <TableCell align="center">Conductores Asignados</TableCell>
-                  <TableCell align="center">Rutas Asignados</TableCell>
-                  <TableCell align="center">Opciones</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                
-                {data.map((row, index) => (
-                  <TableRow className={index % 2 === 0 ? "row-v1" : "row-v2"} key={index}>
-                    <TableCell align="center">{row.name}</TableCell >
-                    <TableCell align="center">{row.vehicles_number}</TableCell >
-                    <TableCell align="center">{row.routes_number}</TableCell >
-                    <TableCell align="center">{row.drivers_number}</TableCell >
-                    <TableCell align="center">
-                    <Link
-                      to="/Rutas"
-                      state={{ organizationId: row.id }}
-                    >
-                      <VisibilityIcon className='icons' fontSize="large" color="primary"/>
-                    </Link>
-                    </TableCell >
+        <Grid container justifyContent="center">
+          <Grid container item sx={{ mt: 3, ml: 2, mr: 2 }}>
+            <h1>Lista Organizaciones</h1>
+            <TableContainer component={Paper}>
+              <Table aria-label="customized table">
+                <TableHead className='table-head'>
+                  <TableRow>
+                    <TableCell align="center">Nombre Organizacion</TableCell>
+                    <TableCell align="center">Vehiculos Asignados</TableCell>
+                    <TableCell align="center">Conductores Asignados</TableCell>
+                    <TableCell align="center">Rutas Asignados</TableCell>
+                    <TableCell align="center">Opciones</TableCell>
                   </TableRow>
+                </TableHead>
+                <TableBody>
 
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </>
+                  {data.map((row, index) => (
+                    <TableRow className={index % 2 === 0 ? "row-v1" : "row-v2"} key={index}>
+                      <TableCell align="center">{row.name}</TableCell >
+                      <TableCell align="center">{row.vehicles_number}</TableCell >
+                      <TableCell align="center">{row.routes_number}</TableCell >
+                      <TableCell align="center">{row.drivers_number}</TableCell >
+                      <TableCell align="center">
+                        <Link
+                          to="/Rutas"
+                          state={{ organizationId: row.id }}
+                        >
+                          <VisibilityIcon className='icons' fontSize="large" color="primary" />
+                        </Link>
+                      </TableCell >
+                    </TableRow>
+
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+        </Grid>
       )
 
   );

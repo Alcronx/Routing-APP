@@ -1,3 +1,7 @@
+html,body{
+  height: 100vh;
+}
+
 .logo{
   text-decoration: none;
   color: inherit;
@@ -106,6 +110,13 @@ h1,h2,h3,h4,h5,h6,p,button,input,td{
   background-color: #2284e4;
 }
 
+.rct-top-header{
+  background-color: #2284e4 !important;
+}
+.rct-top-header span{
+  display: none !important;;
+}
+
 .subHead p{
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   color: white;
@@ -209,9 +220,7 @@ h1,h2,h3,h4,h5,h6,p,button,input,td{
   font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 
-.rct-label-group {
-  display: none;
-}
+
 
 .react-calendar-timeline * {
   box-sizing: border-box; }
