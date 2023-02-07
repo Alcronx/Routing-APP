@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Timeline from "react-calendar-timeline";
-import "react-calendar-timeline/lib/Timeline.css";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content'
 
