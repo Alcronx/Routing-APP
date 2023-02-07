@@ -191,16 +191,16 @@ h1,h2,h3,h4,h5,h6,p,button,input,td{
 }
 
 .routeAsignation {
-  background-color: rgb(26 130 233) !important;
+  background-color: rgb(26,130,233) !important;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 .react-calendar-timeline .rct-header .rct-label-group {
-  background-color: rgb(26 130 233) !important;
+  background-color: rgb(26,130,233) !important;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 
 .react-calendar-timeline .rct-sidebar-header {
-  background-color: rgb(26 130 233) !important;
+  background-color: rgb(26,130,233) !important;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 
