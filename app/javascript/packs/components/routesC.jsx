@@ -415,24 +415,32 @@ function optionsList(color) {
 
 
 function Map() {
+  const { state } = useLocation();
   return (
     <GoogleMap zoom={14} center={{ lat: -33.510191, lng: -70.757234 }} mapContainerClassName="map-container">
-      {route1.map((i, index) => (
-        <Marker key={"route1" + index} position={i} icon={{ url: require("../assets/images/LocationRed.png") }} />
-      ))}
-      {route2.map((i, index) => (
-        <Marker key={"route2" + index} position={i} icon={{ url: require("../assets/images/LocationBlue.png") }} />
-      ))}
-      <Polygon
-        paths={route1}
-        key={1}
-        options={optionsList("red")}
-      />
-      <Polygon
-        paths={route2}
-        key={2}
-        options={optionsList("#5eacef")}
-      />
+      {state.organizationName == "Routing" ?
+        <>
+          {route1.map((i, index) => (
+            <Marker key={"route1" + index} position={i} icon={{ url: require("../assets/images/LocationRed.png") }} />
+          ))}
+          {route2.map((i, index) => (
+            <Marker key={"route2" + index} position={i} icon={{ url: require("../assets/images/LocationBlue.png") }} />
+          ))}
+          <Polygon
+            paths={route1}
+            key={1}
+            options={optionsList("red")}
+          />
+          <Polygon
+            paths={route2}
+            key={2}
+            options={optionsList("#5eacef")}
+          />
+        </>
+        :
+        null
+      }
+
     </GoogleMap>
   )
 }

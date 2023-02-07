@@ -90,7 +90,7 @@ export default function Organization() {
                       <TableCell align="center">
                         <Link
                           to="/Rutas"
-                          state={{ organizationId: row.id }}
+                          state={{ organizationId: row.id,organizationName: row.name}}
                         >
                           <VisibilityIcon className='icons' fontSize="large" color="primary" />
                         </Link>
